@@ -7,26 +7,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!--<script src="js/vue.js"></script>-->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div id="app">
+        <div id="app">
+
+            <!--<div class="demo"-->
+            <!--@click="attachRed = !attachRed"-->
+                 <!--:class="{red: attachRed}"-->
+            <!--&gt;-->
+            <!--</div>-->
+            <!--<div class="demo" @click="attachGreen = !attachGreen" :class="divClasses"></div>-->
+
+            <!--<div class="demo" :class="[color]"></div>-->
+
+            <!--<br>-->
+
+            <!--<input type="text" v-model="color">-->
+
+            <div class="demo" :style="divClasses"></div>
+            <div class="demo" :style="divClasses"></div>
+            <div class="demo" :style="[divClasses, {height: width + 'px'}]"></div>
+            <!--<div class="demo"></div>-->
+            <br>
+            <input type="text" v-model="color">
+            <input type="text" v-model="width">
 
 
-    <button v-on:click="increase">Click me</button>
+        </div>
 
-
-    <button v-on:click="increase">Click me</button>
-    <p>Numer of clicked: {{counter}}</p>
-    <p>Value: {{counter*2}}</p>
-    <p>{{counter*2 >10 ? 'Greater than 10': 'smaller than 10'}}</p>
-    <p v-on:mousemove="coordinates">coordinates: {{ x }} / {{ y }}
-    - <span v-on:mousemove.stop>Dead spot</span>
-    </p>
-
-    <input type="text" v-on:keyup.enter="alert">
-
-</div>
 <script src="js/vue.js"></script>
 <script>
 
@@ -34,10 +44,28 @@
         el: '#app',
         data:{
 
-            counter:0,
-            x:0,
-            y:0
+            color: 'grey',
+            width: 100,
+
+
         },
+        computed: {
+
+          divClasses : function () {
+
+              return{
+
+                  backgroundColor: this.color,
+                  width: this.width + 'px',
+
+              };
+
+          }
+
+
+        },
+
+
         methods:{
 
             increase: function () {
@@ -45,24 +73,6 @@
                 this.counter++;
 
             },
-
-            coordinates: function (event) {
-
-                this.x = event.clientX;
-                this.y = event.clientY;
-
-            },
-
-            stopPropagation: function (event) {
-
-                event.stopPropagation()
-            },
-
-
-            alert: function () {
-                alert('Alert!');
-            }
-
 
         }
 
