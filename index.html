@@ -7,32 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!--<script src="js/vue.js"></script>-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/bootstrap.min.js">  </script>
 </head>
 <body>
 
         <div id="app">
 
-            <!--<div class="demo"-->
-            <!--@click="attachRed = !attachRed"-->
-                 <!--:class="{red: attachRed}"-->
-            <!--&gt;-->
-            <!--</div>-->
-            <!--<div class="demo" @click="attachGreen = !attachGreen" :class="divClasses"></div>-->
+            <ul>
+            <li    v-for="ingredient in ingredients">
+                {{ingredient}}
+            </li>
+            </ul>
 
-            <!--<div class="demo" :class="[color]"></div>-->
+            <!--<template v-for="(ingredient, index) in ingredients">-->
 
-            <!--<br>-->
+                <!--<h1>{{ingredient}}</h1>-->
+                <!--<p>{{index}}</p>-->
 
-            <!--<input type="text" v-model="color">-->
 
-            <div class="demo" :style="divClasses"></div>
-            <div class="demo" :style="divClasses"></div>
-            <div class="demo" :style="[divClasses, {height: width + 'px'}]"></div>
-            <!--<div class="demo"></div>-->
-            <br>
-            <input type="text" v-model="color">
-            <input type="text" v-model="width">
+            <!--</template>-->
+
+            <ul>
+                <li v-for="person in persons">
+
+                    <div   v-for="(value,key,index) in person" >
+
+                        {{key}} :  {{value}} ({{index}})
+
+                    </div>
+
+                </li>
+            </ul>
 
 
         </div>
@@ -43,38 +50,14 @@
     new Vue({
         el: '#app',
         data:{
+            ingredients: ['meat','fruit','cookies'],
+            persons:[
+                {name:'Maheeb', age:25, color:'Black'},
+                {name:'Jane', age:25, color:'White'},
 
-            color: 'grey',
-            width: 100,
-
-
-        },
-        computed: {
-
-          divClasses : function () {
-
-              return{
-
-                  backgroundColor: this.color,
-                  width: this.width + 'px',
-
-              };
-
-          }
-
+            ]
 
         },
-
-
-        methods:{
-
-            increase: function () {
-
-                this.counter++;
-
-            },
-
-        }
 
 
 
