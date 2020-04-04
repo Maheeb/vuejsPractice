@@ -15,10 +15,16 @@
 
     <button v-on:click="increase">Click me</button>
 
-    <p>{{counter}}</p>
 
-    <p v-on:mousemove="coordinates">coordinates: {{ x }} / {{ y }}</p>
+    <button v-on:click="increase">Click me</button>
+    <p>Numer of clicked: {{counter}}</p>
+    <p>Value: {{counter*2}}</p>
+    <p>{{counter*2 >10 ? 'Greater than 10': 'smaller than 10'}}</p>
+    <p v-on:mousemove="coordinates">coordinates: {{ x }} / {{ y }}
+    - <span v-on:mousemove.stop>Dead spot</span>
+    </p>
 
+    <input type="text" v-on:keyup.enter="alert">
 
 </div>
 <script src="js/vue.js"></script>
@@ -45,6 +51,16 @@
                 this.x = event.clientX;
                 this.y = event.clientY;
 
+            },
+
+            stopPropagation: function (event) {
+
+                event.stopPropagation()
+            },
+
+
+            alert: function () {
+                alert('Alert!');
             }
 
 
