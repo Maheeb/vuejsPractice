@@ -9,56 +9,52 @@
     <!--<script src="js/vue.js"></script>-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!--<link rel="stylesheet" href="css/foundation.min.css">-->
+    <!--<link rel="stylesheet" href="css/app.css">-->
     <script src="js/bootstrap.min.js">  </script>
 </head>
 <body>
 
         <div id="app">
 
-            <ul>
-            <li    v-for="ingredient in ingredients">
-                {{ingredient}}
-            </li>
-            </ul>
-
-            <!--<template v-for="(ingredient, index) in ingredients">-->
-
-                <!--<h1>{{ingredient}}</h1>-->
-                <!--<p>{{index}}</p>-->
-
-
-            <!--</template>-->
-
-            <ul>
-                <li v-for="person in persons">
-
-                    <div   v-for="(value,key,index) in person" >
-
-                        {{key}} :  {{value}} ({{index}})
-
-                    </div>
-
-                </li>
-            </ul>
-
-
+            <my-comp></my-comp>
+            <hr>
+            <my-comp></my-comp>
         </div>
 
 <script src="js/vue.js"></script>
 <script>
 
+ var cmp={
+
+            data: function () {
+                return {
+
+                    status: 'Critical'
+
+                }
+            },
+
+            template: '<p>Server status: {{status}} (<button @click="changeStatus">Click me</button>)</p>',
+
+        methods:{
+
+            changeStatus: function () {
+
+                    this.status = 'Normal';
+                }
+        }
+
+    };
+
+
+
     new Vue({
         el: '#app',
-        data:{
-            ingredients: ['meat','fruit','cookies'],
-            persons:[
-                {name:'Maheeb', age:25, color:'Black'},
-                {name:'Jane', age:25, color:'White'},
+        components:{
+            'my-comp': cmp
 
-            ]
-
-        },
-
+        }
 
 
     });
