@@ -1,43 +1,160 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <button @click="selectedComponent = 'appQuote'">Quote</button>
-        <button @click="selectedComponent = 'appAuthor'">Author</button>
-        <button @click="selectedComponent = 'appNew'">New</button>
-        <hr>
-        <p>{{ selectedComponent }}</p>
-        <component :is="selectedComponent">
+    <form>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <h1>File a Complaint</h1>
+          <hr>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input
+                    type="text"
+                    v-model.lazy="userData.email"
+                    id="email"
+                    class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                    v-model.lazy="userData.password"
+                    type="password"
+                    id="password"
+                    class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input
+                    v-model.lazy="userData.Age"
+                    type="number"
+                    id="age"
+                    class="form-control">
+          </div>
 
-          <p>Default content</p>
-        </component>
-        <!--<app-quote>-->
-          <!--<h2 slot="title">{{quoteTitle}}</h2>-->
-          <!--<p slot="content">A wonderful quote</p>-->
-        <!--</app-quote>-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
+          <label for="message">Message</label><br>
+          <!-- Interpolation between <textarea>{{ test }}</textarea> doesn't work!-->
+          <textarea
+                  id="message"
+
+                  rows="5"
+                  class="form-control" v-model="message">
+
+          </textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <div class="form-group">
+            <label for="sendmail">
+              <input
+                      v-model="sendMail"
+                      type="checkbox"
+                      id="sendmail"
+                      value="SendMail"> Send Mail
+            </label>
+            <label for="sendInfomail">
+              <input
+                      v-model="sendMail"
+                      type="checkbox"
+                      id="sendInfomail"
+                      value="SendInfoMail"> Send Infomail
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
+          <label for="male">
+            <input
+                    v-model="gender"
+                    type="radio"
+                    id="male"
+                    value="Male"> Male
+          </label>
+          <label for="female">
+            <input
+                    v-model="gender"
+                    type="radio"
+                    id="female"
+                    value="Female"> Female
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
+          <label for="priority">Priority</label>
+          <select
+                  v-model="selectedPriority"
+                  id="priority"
+                  class="form-control">
+            <option v-for="(item,index) in priorities" :key="item.id" :index="index"> {{item}}</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <button
+                  class="btn btn-primary"
+                  @click.prevent="Submitted"
+
+          >Submit!
+
+          </button>
+        </div>
+      </div>
+    </form>
+    <hr>
+    <div class="row" v-if="isSubmit">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Your Data</h4>
+          </div>
+          <div class="panel-body" >
+            <p>Mail: {{userData.email}}</p>
+            <p>Password: {{userData.password}}</p>
+            <p>Age: {{userData.Age}}</p>
+            <p  style="white-space: pre">Message: {{message}} </p>
+            <p><strong>Send Mail?</strong></p>
+            <ul>
+              <li v-for="(item,index) in sendMail" :key="item.id" :index="index">{{item}}</li>
+            </ul>
+            <p>Gender: {{gender}}</p>
+            <p>Priority: {{selectedPriority}}</p>
+            <p>Switched:</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-import Quote from './components/Quote';
-import Author from './components/Author';
-import New from  './components/New';
     export default {
-
-        components: {
-            appQuote: Quote,
-            appAuthor: Author,
-            appNew: New
-        },
-
-        data:function () {
+        data: function () {
             return{
+               userData:{
+                   email:'',
+                   password:'',
+                   Age: 25
+               },
+                message: 'Your message here',
+                sendMail:[],
+                gender:'Male',
+                priorities:['High','Medium','Low'],
+                selectedPriority: 'High',
+                isSubmit: false
+            }
+        },
+        methods:{
+            Submitted: function () {
 
-                quoteTitle: 'I am the title',
-                selectedComponent: 'appQuote'
+                this.isSubmit = true
             }
 
         }
@@ -46,8 +163,5 @@ import New from  './components/New';
 </script>
 
 <style>
-  div.component {
-    border: 1px solid black;
-    padding: 30px;
-  }
+
 </style>
