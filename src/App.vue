@@ -1,90 +1,43 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-        <h1>Directives</h1>
-        <p v-highlight:background.delayed="'red'"> This is global text</p>
-        <p v-local-highlight:background.delayed.blink="'red'">Some text</p>
 
-      </div>
-    </div>
+        <input type="text" v-model="filteredText">
+        <ul>
+            <li v-for="(item,index) in filteredFruits" :index="index" :item="item" :key="index.id">
+
+              {{item}}
+
+            </li>
+        </ul>
+        <hr>
+        <app-list></app-list>
+
   </div>
 </template>
 
 <script>
+  import {fruitMixin} from "./fruitMixin";
+  import List from './components/List'
     export default {
-        directives:{
-            'local-highlight': {
-                bind(el,binding){
-                    // el.style.backgroundColor='green';
-                    var delay = 0;
-                    if(binding.modifiers['delayed']){
-                        delay =2000;
-                    }
-                    if(binding.modifiers['blink']){
+      mixins: [fruitMixin],
+        components:{
+            appList: List
 
-                          let maincolor = binding.value;
-                          let secondcolor = 'blue';
-                          let currentcolor = maincolor;
-
-                        setTimeout(()=>{
-
-                            setInterval( ()=>{
-
-                              currentcolor === secondcolor? currentcolor=maincolor: currentcolor=secondcolor;
-
-                                if(binding.arg==='background'){
-
-                                    el.style.backgroundColor=currentcolor;
-
-                                }else{
-
-                                    el.style.color= currentcolor;
-                                }
-
-                            },1000);
-
-
-
-                        },delay)
-
-
-
-
-                    }
-
-                   else {
-
-                        setTimeout(()=>{
-
-                            if(binding.arg==='background'){
-
-                                el.style.backgroundColor=binding.value;
-
-                            }else{
-
-                                el.style.color= binding.value;
-                            }
-
-
-                        },delay)
-
-                    }
-
-
-
-                }
-
-
+        },
+        data: function () {
+            return{
+                text: 'Hello world',
 
             }
 
+        },
 
+        filters:{
+            toUppercase : function (value) {
+                return value.toUpperCase();
 
-
-
-        }
-
+            }
+        },
 
 
     }
