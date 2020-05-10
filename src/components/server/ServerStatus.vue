@@ -1,30 +1,35 @@
 <template>
-    <div>
 
-        <p>server status: {{ status}}</p>
-
+    <div style="margin-left: 5px">
+        <p>Server Status: {{status}}</p>
         <hr>
-
-        <button @click="changeStatus">click me</button>
-
+        <button @click="changeStatus">Click me</button>
     </div>
+
 </template>
 
 <script>
+
     export default {
-        // name: "Home",
         data: function () {
             return{
-
-                status: 'critical'
+                status: 'critical',
+                show: false
             }
         },
-        methods: {
-            changeStatus: function () {
+        methods:{
+            changeStatus:function () {
+                // this.status= 'normal';
+                // this.show=true;
 
-                this.status = 'Normal'
+                if(this.status==='normal'){
+                    this.status= 'critical'
+                }else{
+                    this.status = 'normal';
+                }
 
             }
+
         }
 
     }
