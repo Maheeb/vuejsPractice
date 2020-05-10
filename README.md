@@ -1,24 +1,6 @@
-# example-vue-project
+## About this project
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+I am learning Vuejs through practicing. I will keep updating this repository over and over again whenever I manage to learn something new.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+:)
